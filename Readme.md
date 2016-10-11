@@ -1,3 +1,6 @@
-This is the place where all the source code will be stored.
-The modifications will be added to this git.
-The source code here will compile.
+Changes will be made in the development branch and pushed to the stable branch
+
+Please use this --->>> STABLE branch <<<<<--- for source that will compile.
+
+NOTE THIS BRANCH IS NOT COMPLETE YET.
+
