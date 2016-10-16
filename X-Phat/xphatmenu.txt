@@ -1,0 +1,20 @@
+
+
+1. VIEW COMPLETE LIST OF AVAILABLE TARGETS
+
+2. VIEW DETAILED LIST OF TARGETS AND VERSIONS
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    (!!! AFTER YOU HAVE COMPILED THE KERNEL !!!)
+3. BUILD DEFAULT VERSION {mobile-msm8909-k6p}
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+(**** IMPORTANT RUN OPTION 1 THEN RUN 4 *****)
+    (!!! AFTER YOU HAVE COMPILED THE KERNEL !!!)
+4. SELECT OTHER VERSION & BUILD MODULE
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+5. EXIT
+
