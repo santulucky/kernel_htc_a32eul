@@ -48,7 +48,7 @@ config QCOM_VOWIFI_11R
 config ENABLE_LINUX_REG
 	bool "Enable linux regulatory feature"
 	default n
-
+	
 config WLAN_OFFLOAD_PACKETS
 	bool "Enable offload packets feature"
 	default n
@@ -61,6 +61,21 @@ config WLAN_FEATURE_LPSS
 	bool "Enable the WLAN LPSS feature test"
 	default n
 
+<<<<<<< HEAD
+config WLAN_OFFLOAD_PACKETS
+	bool "Enable offload packets feature"
+	default n
+
+config QCOM_TDLS
+	bool "Enable TDLS (Tunnel Direct Link Setup) feature"
+	default n
+
+config WLAN_FEATURE_LPSS
+	bool "Enable the WLAN LPSS feature test"
+	default n
+
+=======
+>>>>>>> 29b3ace4e5dd022c604b06576401066e989b58b9
 config WLAN_FEATURE_NAN
 	bool "Enable NAN feature test"
 	default n
@@ -72,5 +87,9 @@ config QCOM_LTE_COEX
 config WLAN_FEATURE_MEMDUMP
 	bool "Enable MEMDUMP feature"
 	default n
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 29b3ace4e5dd022c604b06576401066e989b58b9
 endif # PRIMA_WLAN || PRONTO_WLAN
