@@ -10,4 +10,6 @@ make clean
 make mrproper
 make 1Big-Country_defconfig -j8
 make prepare -j8
+make menuconfig
+make all -j8
 make modules -j8
