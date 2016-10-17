@@ -57,4 +57,20 @@ config QCOM_TDLS
 	bool "Enable TDLS (Tunnel Direct Link Setup) feature"
 	default n
 
+config WLAN_FEATURE_LPSS
+	bool "Enable the WLAN LPSS feature"
+	default n
+
+config WLAN_FEATURE_MEMDUMP
+	bool "Enable MEMDUMP feature"
+	default n
+
+config QCOM_LTE_COEX
+	bool "Enable QCOM LTE Coex feature"
+	default n
+
+config WLAN_FEATURE_NAN
+	bool "Enable NAN feature"
+	default n
+
 endif # PRIMA_WLAN || PRONTO_WLAN
