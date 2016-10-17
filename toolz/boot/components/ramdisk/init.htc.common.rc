@@ -1,0 +1,80 @@
+########################
+#  init.htc.common.rc  #
+########################
+
+#++ 2014.10.29 USB Team, PCN00026 ++
+import init.htc.usb.rc
+#-- 2014.10.29 USB Team, PCN00026 --
+
+on fs
+    mkdir /firmware 0771 system system
+    mkdir /firmware/image 0771 system system
+
+    # Mount radio image
+    mkdir /firmware/radio 0771 system system
+    wait /dev/block/bootdevice/by-name/radio
+    mount vfat /dev/block/bootdevice/by-name/radio /firmware/radio ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+
+    # Mount wcnss image
+    mkdir /firmware/wcnss 0771 system system
+    wait /dev/block/bootdevice/by-name/wcnss
+    mount vfat /dev/block/bootdevice/by-name/wcnss /firmware/wcnss ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+
+    # Mount carrier partition
+    mkdir /carrier 0770 system carrier
+    wait /dev/block/bootdevice/by-name/carrier
+    mount ext4 /dev/block/bootdevice/by-name/carrier /carrier nosuid nodev noatime barrier=1,grpid
+    chown system carrier /carrier
+    chmod 0770 /carrier
+    # restorecon carrier partition.
+    restorecon_recursive /carrier
+
+    wait /system/bin/sh
+    class_start firmware-link
+    wait /firmware/image/.radio_done
+    wait /firmware/image/.wcnss_done
+    # cabc level control
+    chown system graphics /sys/class/leds/lcd-backlight/cabc_level_ctl
+
+# maintain the list of processes name for kernel monitoring usage
+    chown system /sys/process/task_comm_list
+    # Load Mocana FIPS module. Add here since it can make sure system is mounted
+    insmod /system/lib/modules/moc_platform_mod.ko
+    insmod /system/lib/modules/moc_crypto.ko
+    insmod /system/lib/modules/moc_crypto_api_tmpl.ko
+    # exfat
+    insmod /system/lib/modules/texfat.ko
+
+on boot
+    # Assign androidboot.ddrsize to ro.product.ram
+    setprop ro.product.ram ${ro.boot.ddrsize}
+
+service fwnk-radio /system/bin/sh /init.qcom.firmware_links.sh /firmware/radio /firmware/image "modem* mba*" radio
+    class firmware-link
+    oneshot
+
+service fwnk-wcnss  /system/bin/sh /init.qcom.firmware_links.sh /firmware/wcnss /firmware/image "wcnss*" wcnss
+    class firmware-link
+    oneshot
+
+on property:sys.boot_completed=1
+    start mocana-startup
+
+service mocana-startup /system/bin/sh /system/etc/init.mocana.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
+# bugreport is triggered by the KEY_VOL-UP and KEY_VOL-DOWN keycodes
+service bugreport /system/bin/dumpstate -d -p -B \
+ -o /data/data/com.android.shell/files/bugreports/bugreport
+    disabled
+    cgroup bg
+    oneshot
+    keycodes 114 115
+
+# when temperature protection is disabled, bg anr is disabled as well
+on property:ro.boot.temp_protect=0
+    setprop profiler.debug.hide_bg_anr "1"
+

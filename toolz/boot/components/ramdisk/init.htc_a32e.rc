@@ -1,0 +1,72 @@
+import init.qcom.rc
+import init.htc.common.rc
+import init.htc_storage.rc
+#++ 2014.10.29 USB Team, PCN00026 ++
+import init.htc_a32e.usb.rc
+#-- 2014.10.29 USB Team, PCN00026 --
+
+on boot
+
+# permissions for NFC
+chmod 0600 /dev/pn544
+chown nfc nfc /dev/pn544
+setprop debug.nfc.fw_download "true"
+setprop debug.nfc.fw_boot_download "false"
+# NFC --
+
+    # factory reset protection
+    setprop ro.frp.pst "/dev/block/bootdevice/by-name/frp"
+
+# Disable hrdump in current stage due to the partition layout does not lock down
+#on post-fs-data
+#        start hrdump
+
+# HTC HRDUMP - BEGIN
+service hrdump /system/bin/hrdump -s
+    disabled
+    oneshot
+
+on property:ro.boot.htc.hrdump=detected
+        setprop debug.htc.hrdump "detected"
+
+# HTC HRDUMP - END
+
+# HTC Embedded Log +++
+service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
+    user root
+    disabled
+    oneshot
+    ioprio idle 0
+
+service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
+    user root
+    disabled
+    oneshot
+    ioprio idle 0
+
+on property:ro.build.tags=test-keys
+    start htc_ebdlogd
+
+on property:ro.build.tags=release-keys
+    start htc_ebdlogd_rel
+# HTC Embedded Log ---
+
+#++ DMAgent
+service dmagent /system/bin/dmagent
+    class late_start
+    socket dmagent stream 660 root inet
+    user root
+#-- DMAgent
+
+# HTC Automotive - BEGIN
+service cand /system/bin/cand
+	class main
+	user root
+# HTC Automotive - END
+
+# +SSD_RIL: TMO trustonic daemon
+service tsdaemon /system/bin/tsdaemon
+    class main
+    user radio
+    group system
+# -SSD_RIL: TMO trustonic daemon
