@@ -558,6 +558,11 @@ config MSM_CORE_CTL_HELPER
 	  system load and state. It also supports limiting min and
 	  max online CPUs from userspace.
 
+config MSM_CORE_CTL
+	tristate "Core control module"
+	help
+	  Add support for the Qualcomm core control module
+	  
 config MSM_PERFORMANCE
 	tristate "Core control driver to support userspace hotplug requests"
 	help

@@ -1,0 +1,10 @@
+
+on fs
+    # mount preload data partition
+    mkdir /preload 0771 system system
+    wait /dev/block/bootdevice/by-name/apppreload
+    mount ext4 /dev/block/bootdevice/by-name/apppreload /preload nosuid nodev noatime barrier=1,grpid
+
+on post-fs-data
+    chown system system /preload
+    chmod 0771 /preload
