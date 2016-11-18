@@ -1,0 +1,44 @@
+EXFATVSN(8)                                                        EXFATVSN(8)
+
+
+
+NAME
+       exfatvsn  -  display/change  the  volume serial number on an exFAT file
+       system
+
+SYNOPSIS
+       exfatvsn [options] device
+
+DESCRIPTION
+       exfatvsn will display or change the volume serial number on  the  exFAT
+       file system located on device.
+
+       If  the  -s  option  is not specified, the current volume serial number
+       will be printed to standard output and no modifications will be made.
+
+OPTIONS
+       Below is a summary of all the options that  exfatvsn  accepts.   Nearly
+       all options have two equivalent names.  The short name is preceded by -
+       and the long name is preceded by --.
+
+       -s, --serial-number VSN
+              Set the volume serial number of an exFAT volume to VSN. The vol‐
+              ume  serial  number is a 9-character string with two groups of 4
+              hexadecimal  characters  each,  separated  by  a  hyphen   (e.g.
+              A45F-99E3).
+
+BUGS
+       There  are  no  known problems with exfatvsn.  If you find a bug please
+       send an email describing the problem to exfat-support@tuxera.com.
+
+AUTHORS
+       exfatvsn was written by:
+               Erik Larsson, Tuxera Inc.
+               Rakesh Pandit, Tuxera Inc.
+
+AVAILABILITY
+       exfatvsn is part of the Tuxera exFAT package.
+
+
+
+Tuxera exFAT 3015.10.19          October 2015                      EXFATVSN(8)

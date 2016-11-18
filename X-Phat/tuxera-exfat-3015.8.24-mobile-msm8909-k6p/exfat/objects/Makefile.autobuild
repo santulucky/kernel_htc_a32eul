@@ -1,0 +1,12 @@
+ifeq ($(wildcard include/linux/compile.h include/generated/compile.h),)
+EXTRA_CFLAGS += -DTUXERA_NO_COMPILE_H -DUTS_MACHINE=\"$(UTS_MACHINE)\"
+ifdef CONFIG_SMP
+SMP=SMP
+endif
+ifdef CONFIG_PREEMPT
+PREEMPT=preempt
+endif
+EXTRA_CFLAGS += -DUTS_VERSION=\"$(SMP)\ $(PREEMPT)\ UNKNOWN\"
+endif
+obj-m += texfat.o
+texfat-objs := aops.o bitmap.o chain.o compat.o debug.o dir.o fat.o file.o inode.o journal.o lcnalloc.o namei.o super.o sysctl.o time.o tuts.o unistr.o 

@@ -1,0 +1,48 @@
+.\" Copyright (c) 2015 Erik Larsson / Tuxera Inc.
+.\"
+.TH EXFATVSN 8 "October 2015" "Tuxera exFAT 3015.10.19"
+.SH NAME
+exfatvsn \- display/change the volume serial number on an exFAT file system
+.SH SYNOPSIS
+.B exfatvsn
+[\fIoptions\fR] \fIdevice
+.SH DESCRIPTION
+.B exfatvsn
+will display or change the volume serial number on the exFAT file system located
+on
+.IR device .
+.PP
+If the \fB\-s\fR option is not specified, the current volume serial number will
+be printed to standard output and no modifications will be made.
+.SH OPTIONS
+Below is a summary of all the options that
+.B exfatvsn
+accepts.  Nearly all options have two equivalent names.  The short name is
+preceded by
+.B \-
+and the long name is preceded by
+.BR \-\- .
+.TP
+\fB\-s\fR, \fB\-\-serial\-number\fR VSN
+Set the volume serial number of an exFAT volume to \fBVSN\fR. The volume serial
+number is a 9\-character string with two groups of 4 hexadecimal characters
+each, separated by a hyphen (e.g. A45F\-99E3).
+.SH BUGS
+There are no known problems with
+.BR exfatvsn .
+If you find a bug please send an email describing the problem to
+exfat-support@tuxera.com.
+.hy
+.SH AUTHORS
+.B exfatvsn
+was written by:
+.RS 8
+Erik Larsson, Tuxera Inc.
+.br
+Rakesh Pandit, Tuxera Inc.
+.RE
+.SH AVAILABILITY
+.B exfatvsn
+is part of the
+.B Tuxera exFAT
+package.
